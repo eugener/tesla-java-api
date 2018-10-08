@@ -1,5 +1,6 @@
 package org.oxbow.tesla;
 
+import org.oxbow.tesla.domain.ChargeState;
 import org.oxbow.tesla.domain.Vehicle;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -27,7 +28,8 @@ public final class TeslaClient {
         if (!response.isSuccessful()) {
             throw new AuthorizationException(response.message());
         }
-        return "Bearer " + response.body().getAccessToken();
+        TokenResponse tokenResponse = response.body();
+        return  tokenResponse.getTokenType() + " " + tokenResponse.getAccessToken();
     }
 
 
@@ -46,8 +48,12 @@ public final class TeslaClient {
      * @return vehicle information
      * @throws IOException
      */
-    public Vehicle getVehicle( String id ) throws IOException {
+    public Vehicle getVehicle( long id ) throws IOException {
         return service.getVehicle(getTokenHeaderValue(), id).execute().body().getContent();
+    }
+
+    public ChargeState getChargeState( long id ) throws IOException {
+        return service.getChargeState(getTokenHeaderValue(), id).execute().body().getContent();
     }
 
 }

@@ -1,119 +1,154 @@
 package org.oxbow.tesla.domain;
 
+import java.util.List;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
+// See http://www.jsonschema2pojo.org/
 public class Vehicle {
 
     @SerializedName("id")
-    private String id;
-
+    @Expose
+    private Long id;
     @SerializedName("vehicle_id")
-    private String vehicleId;
-
+    @Expose
+    private Long vehicleId;
     @SerializedName("vin")
+    @Expose
     private String vin;
-
     @SerializedName("display_name")
+    @Expose
     private String displayName;
-
     @SerializedName("option_codes")
+    @Expose
     private String optionCodes;
-
     @SerializedName("color")
-    private String color;
-
+    @Expose
+    private Object color;
     @SerializedName("tokens")
-    private List<String> tokens;
-
+    @Expose
+    private List<String> tokens = null;
     @SerializedName("state")
+    @Expose
     private String state;
-
     @SerializedName("in_service")
-    private boolean inService;
-
+    @Expose
+    private Boolean inService;
     @SerializedName("id_s")
-    private String ids;
-
+    @Expose
+    private String idS;
     @SerializedName("calendar_enabled")
-    private boolean calendarEnabled;
-
+    @Expose
+    private Boolean calendarEnabled;
     @SerializedName("backseat_token")
-    private String backseatToken;
-
+    @Expose
+    private Object backseatToken;
     @SerializedName("backseat_token_updated_at")
-    private String backseatTokenUpdatedAt;
+    @Expose
+    private Object backseatTokenUpdatedAt;
 
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public String getVehicleId() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getVehicleId() {
         return vehicleId;
+    }
+
+    public void setVehicleId(Long vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
     public String getVin() {
         return vin;
     }
 
+    public void setVin(String vin) {
+        this.vin = vin;
+    }
+
     public String getDisplayName() {
         return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getOptionCodes() {
         return optionCodes;
     }
 
-    public String getColor() {
+    public void setOptionCodes(String optionCodes) {
+        this.optionCodes = optionCodes;
+    }
+
+    public Object getColor() {
         return color;
+    }
+
+    public void setColor(Object color) {
+        this.color = color;
     }
 
     public List<String> getTokens() {
         return tokens;
     }
 
+    public void setTokens(List<String> tokens) {
+        this.tokens = tokens;
+    }
+
     public String getState() {
         return state;
     }
 
-    public boolean isInService() {
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Boolean getInService() {
         return inService;
     }
 
-    public String getIds() {
-        return ids;
+    public void setInService(Boolean inService) {
+        this.inService = inService;
     }
 
-    public boolean isCalendarEnabled() {
+    public String getIdS() {
+        return idS;
+    }
+
+    public void setIdS(String idS) {
+        this.idS = idS;
+    }
+
+    public Boolean getCalendarEnabled() {
         return calendarEnabled;
     }
 
-    public String getBackseatToken() {
+    public void setCalendarEnabled(Boolean calendarEnabled) {
+        this.calendarEnabled = calendarEnabled;
+    }
+
+    public Object getBackseatToken() {
         return backseatToken;
     }
 
-    public String getBackseatTokenUpdatedAt() {
+    public void setBackseatToken(Object backseatToken) {
+        this.backseatToken = backseatToken;
+    }
+
+    public Object getBackseatTokenUpdatedAt() {
         return backseatTokenUpdatedAt;
     }
 
-    @Override
-    public String toString() {
-        return "Vehicle{\n" +
-                "id='" + id + '\'' +
-                ", \n\tvehicleId='" + vehicleId + '\'' +
-                ", \n\tvin='" + vin + '\'' +
-                ", \n\tdisplayName='" + displayName + '\'' +
-                ", \n\toptionCodes='" + optionCodes + '\'' +
-                ", \n\tcolor='" + color + '\'' +
-                ", \n\ttokens=" + tokens +
-                ", \n\tstate='" + state + '\'' +
-                ", \n\tinService=" + inService +
-                ", \n\tids='" + ids + '\'' +
-                ", \n\tcalendarEnabled=" + calendarEnabled +
-                ", \n\tbackseatToken='" + backseatToken + '\'' +
-                ", \n\tbackseatTokenUpdatedAt='" + backseatTokenUpdatedAt + '\'' +
-                "\n}";
+    public void setBackseatTokenUpdatedAt(Object backseatTokenUpdatedAt) {
+        this.backseatTokenUpdatedAt = backseatTokenUpdatedAt;
     }
+
 }

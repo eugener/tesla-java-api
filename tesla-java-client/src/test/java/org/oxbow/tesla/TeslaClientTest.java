@@ -2,6 +2,7 @@ package org.oxbow.tesla;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.oxbow.tesla.domain.ChargeState;
 import org.oxbow.tesla.domain.Vehicle;
 
 import java.io.IOException;
@@ -18,9 +19,18 @@ public class TeslaClientTest {
     public void testVehicleAPI() throws IOException {
         List<Vehicle> vehicles = client.getVehicles();
         Assert.assertTrue( vehicles.size() > 0);
-        String id = vehicles.get(0).getId();
+        Long id = vehicles.get(0).getId();
         Vehicle vehicle = client.getVehicle(id);
         Assert.assertEquals( id, vehicle.getId());
+    }
+
+    @Test
+    public void testChargeStateAPI() throws IOException {
+        List<Vehicle> vehicles = client.getVehicles();
+        Assert.assertTrue( vehicles.size() > 0);
+        Long id = vehicles.get(0).getId();
+        ChargeState chargeState = client.getChargeState(id);
+        Assert.assertTrue( chargeState != null);
     }
 
 }
