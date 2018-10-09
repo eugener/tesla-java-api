@@ -1,6 +1,5 @@
 package org.oxbow.tesla;
 
-//TokenResponse.java
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,9 +8,11 @@ class TokenResponse {
     @SerializedName("token_type")
     @Expose
     private String tokenType;
+
     @SerializedName("expires_in")
     @Expose
     private Integer expiresIn;
+
     @SerializedName("access_token")
     @Expose
     private String accessToken;

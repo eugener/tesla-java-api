@@ -10,39 +10,51 @@ public class Vehicle {
     @SerializedName("id")
     @Expose
     private Long id;
+
     @SerializedName("vehicle_id")
     @Expose
     private Long vehicleId;
+
     @SerializedName("vin")
     @Expose
     private String vin;
+
     @SerializedName("display_name")
     @Expose
     private String displayName;
+
     @SerializedName("option_codes")
     @Expose
     private String optionCodes;
+
     @SerializedName("color")
     @Expose
     private Object color;
+
     @SerializedName("tokens")
     @Expose
     private List<String> tokens = null;
+
     @SerializedName("state")
     @Expose
     private String state;
+
     @SerializedName("in_service")
     @Expose
     private Boolean inService;
+
     @SerializedName("id_s")
     @Expose
     private String idS;
+
     @SerializedName("calendar_enabled")
     @Expose
     private Boolean calendarEnabled;
+
     @SerializedName("backseat_token")
     @Expose
     private Object backseatToken;
+
     @SerializedName("backseat_token_updated_at")
     @Expose
     private Object backseatTokenUpdatedAt;

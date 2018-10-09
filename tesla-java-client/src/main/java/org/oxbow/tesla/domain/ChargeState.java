@@ -9,123 +9,163 @@ public class ChargeState {
     @SerializedName("charging_state")
     @Expose
     private String chargingState;
+
     @SerializedName("fast_charger_type")
     @Expose
     private String fastChargerType;
+
     @SerializedName("fast_charger_brand")
     @Expose
     private String fastChargerBrand;
+
     @SerializedName("charge_limit_soc")
     @Expose
     private Integer chargeLimitSoc;
+
     @SerializedName("charge_limit_soc_std")
     @Expose
     private Integer chargeLimitSocStd;
+
     @SerializedName("charge_limit_soc_min")
     @Expose
     private Integer chargeLimitSocMin;
+
     @SerializedName("charge_limit_soc_max")
     @Expose
     private Integer chargeLimitSocMax;
+
     @SerializedName("charge_to_max_range")
     @Expose
     private Boolean chargeToMaxRange;
+
     @SerializedName("max_range_charge_counter")
     @Expose
     private Integer maxRangeChargeCounter;
+
     @SerializedName("fast_charger_present")
     @Expose
     private Object fastChargerPresent;
+
     @SerializedName("battery_range")
     @Expose
     private Double batteryRange;
+
     @SerializedName("est_battery_range")
     @Expose
     private Double estBatteryRange;
+
     @SerializedName("ideal_battery_range")
     @Expose
     private Double idealBatteryRange;
+
     @SerializedName("battery_level")
     @Expose
     private Integer batteryLevel;
+
     @SerializedName("usable_battery_level")
     @Expose
     private Integer usableBatteryLevel;
+
     @SerializedName("charge_energy_added")
     @Expose
     private Double chargeEnergyAdded;
+
     @SerializedName("charge_miles_added_rated")
     @Expose
     private Double chargeMilesAddedRated;
+
     @SerializedName("charge_miles_added_ideal")
     @Expose
     private Double chargeMilesAddedIdeal;
+
     @SerializedName("charger_voltage")
     @Expose
     private Object chargerVoltage;
+
     @SerializedName("charger_pilot_current")
     @Expose
     private Object chargerPilotCurrent;
+
     @SerializedName("charger_actual_current")
     @Expose
     private Object chargerActualCurrent;
+
     @SerializedName("charger_power")
     @Expose
     private Object chargerPower;
+
     @SerializedName("time_to_full_charge")
     @Expose
     private Double timeToFullCharge;
+
     @SerializedName("trip_charging")
     @Expose
     private Object tripCharging;
+
     @SerializedName("charge_rate")
     @Expose
     private Double chargeRate;
+
     @SerializedName("charge_port_door_open")
     @Expose
     private Object chargePortDoorOpen;
+
     @SerializedName("conn_charge_cable")
     @Expose
     private String connChargeCable;
+
     @SerializedName("scheduled_charging_start_time")
     @Expose
     private Object scheduledChargingStartTime;
+
     @SerializedName("scheduled_charging_pending")
     @Expose
     private Boolean scheduledChargingPending;
+
     @SerializedName("user_charge_enable_request")
     @Expose
     private Object userChargeEnableRequest;
+
     @SerializedName("charge_enable_request")
     @Expose
     private Boolean chargeEnableRequest;
+
     @SerializedName("charger_phases")
     @Expose
     private Object chargerPhases;
+
     @SerializedName("charge_port_latch")
     @Expose
     private String chargePortLatch;
+
     @SerializedName("charge_current_request")
     @Expose
     private Integer chargeCurrentRequest;
+
     @SerializedName("charge_current_request_max")
     @Expose
     private Integer chargeCurrentRequestMax;
+
     @SerializedName("managed_charging_active")
     @Expose
     private Boolean managedChargingActive;
+
     @SerializedName("managed_charging_user_canceled")
     @Expose
     private Boolean managedChargingUserCanceled;
+
     @SerializedName("managed_charging_start_time")
     @Expose
     private Object managedChargingStartTime;
+
     @SerializedName("battery_heater_on")
     @Expose
     private Boolean batteryHeaterOn;
+
     @SerializedName("not_enough_power_to_heat")
     @Expose
     private Object notEnoughPowerToHeat;
+
     @SerializedName("timestamp")
     @Expose
     private Long timestamp;
