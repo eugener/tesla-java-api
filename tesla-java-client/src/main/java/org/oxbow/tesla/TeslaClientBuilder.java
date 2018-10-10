@@ -20,8 +20,8 @@ public final class TeslaClientBuilder {
                 .build();
 
     private Call<TokenResponse> tokenCall;
-    private Optional<String> clientId = Optional.empty();
-    private Optional<String> clientSecret = Optional.empty();
+    private String clientId = null;
+    private String clientSecret = null;
 
     private String email;
     private String password;
@@ -43,8 +43,8 @@ public final class TeslaClientBuilder {
      * @param clientSecret client secret
      */
     public final void client(String clientId, String clientSecret) {
-        this.clientId = Optional.ofNullable(clientId);
-        this.clientSecret = Optional.ofNullable(clientSecret);
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
     }
 
     /**
@@ -55,8 +55,8 @@ public final class TeslaClientBuilder {
 
         tokenCall = retrofit.create(TeslaAuthService.class).getToken(
                 "password",
-                clientId.orElse(CLIENT_ID),
-                clientSecret.orElse(CLIENT_SECRET),
+                Optional.ofNullable(clientId).orElse(CLIENT_ID),
+                Optional.ofNullable(clientSecret).orElse(CLIENT_SECRET),
                 email,
                 password);
 
