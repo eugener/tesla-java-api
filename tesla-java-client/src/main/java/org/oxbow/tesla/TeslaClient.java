@@ -3,12 +3,11 @@ package org.oxbow.tesla;
 import org.oxbow.tesla.domain.ChargeState;
 import org.oxbow.tesla.domain.Vehicle;
 import retrofit2.Call;
-import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.List;
 
-public final class TeslaClient {
+public final class TeslaClient extends BaseService {
 
     private final TeslaService service;
     private final Call<TokenResponse> tokenCall;
@@ -23,23 +22,21 @@ public final class TeslaClient {
     }
 
     // TODO refresh token when expired
-    private String getTokenHeaderValue() throws IOException {
-        Response<TokenResponse> response = tokenCall.clone().execute();
-        if (!response.isSuccessful()) {
-            throw new AuthorizationException(response.message());
-        }
-        TokenResponse tokenResponse = response.body();
-        return  tokenResponse.getTokenType() + " " + tokenResponse.getAccessToken();
+    private String getTokenHeaderValue() {
+        TokenResponse tokenResponse = getCallValue(
+                tokenCall.clone(),
+                AuthorizationException::new,
+                AuthorizationException::new);
+        return tokenResponse.getTokenType() + " " + tokenResponse.getAccessToken();
     }
-
 
     /**
      * Retrieve a list of your owned vehicles (includes vehicles not yet shipped!)
      * @return list of vehicles
      * @throws IOException
      */
-    public List<Vehicle> getVehicles() throws IOException {
-        return service.getVehicles(getTokenHeaderValue()).execute().body().getContent();
+    public List<Vehicle> getVehicles() {
+        return getCallContent( service.getVehicles(getTokenHeaderValue()));
     }
 
     /**
@@ -48,12 +45,12 @@ public final class TeslaClient {
      * @return vehicle information
      * @throws IOException
      */
-    public Vehicle getVehicle( long id ) throws IOException {
-        return service.getVehicle(getTokenHeaderValue(), id).execute().body().getContent();
+    public Vehicle getVehicle( long id ) {
+        return getCallContent( service.getVehicle(getTokenHeaderValue(), id));
     }
 
-    public ChargeState getChargeState( long id ) throws IOException {
-        return service.getChargeState(getTokenHeaderValue(), id).execute().body().getContent();
+    public ChargeState getChargeState( long id ) {
+        return getCallContent( service.getChargeState(getTokenHeaderValue(), id));
     }
 
 }
