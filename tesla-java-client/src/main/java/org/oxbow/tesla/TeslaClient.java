@@ -36,7 +36,7 @@ public final class TeslaClient extends BaseService {
      * @throws IOException
      */
     public List<Vehicle> getVehicles() {
-        return getCallContent( service.getVehicles(getTokenHeaderValue()));
+        return getResponse( service.getVehicles(getTokenHeaderValue()));
     }
 
     /**
@@ -46,11 +46,18 @@ public final class TeslaClient extends BaseService {
      * @throws IOException
      */
     public Vehicle getVehicle( long id ) {
-        return getCallContent( service.getVehicle(getTokenHeaderValue(), id));
+        return getResponse( service.getVehicle(getTokenHeaderValue(), id));
     }
 
     public ChargeState getChargeState( long id ) {
-        return getCallContent( service.getChargeState(getTokenHeaderValue(), id));
+        return getResponse( service.getChargeState(getTokenHeaderValue(), id));
+    }
+
+
+    // Commands
+
+    public boolean wake( long id ) {
+        return getResult( service.wake(getTokenHeaderValue(),id));
     }
 
 }

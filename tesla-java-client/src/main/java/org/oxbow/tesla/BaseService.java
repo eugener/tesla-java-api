@@ -3,7 +3,6 @@ package org.oxbow.tesla;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import retrofit2.Call;
-import retrofit2.Response;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -14,8 +13,12 @@ class BaseService {
 
     private static Gson GSON = new Gson();
 
-    <T> T getCallContent(Call<ContentHolder<T>> call ) {
+    <T> T getResponse(Call<Response<T>> call ) {
         return getCallValue(call).getContent();
+    }
+
+    <T> T getResult(Call<Result<T>> call ) {
+        return getCallValue(call).getResult();
     }
 
     <T> T getCallValue(Call<T> call ) {
@@ -27,20 +30,45 @@ class BaseService {
                        Function<String,RuntimeException> fromText) {
 
         try {
-            Response<T> response = Objects.requireNonNull( call ).execute();
+            retrofit2.Response<T> response = Objects.requireNonNull( call ).execute();
             if ( response.isSuccessful() ) {
                 return response.body();
             } else {
                 String errorJson = new String( response.errorBody().bytes(), StandardCharsets.UTF_8);
                 ErrorHolder errorHolder = GSON.fromJson(errorJson, ErrorHolder.class );
-                throw fromText.apply( errorHolder.error );
+                throw produceException( fromText, errorHolder.error);
             }
         } catch (IOException e) {
-            throw fromCause.apply(e);
+            throw produceException( fromCause, e);
         }
     }
 
+    private <T> RuntimeException produceException(Function<T,RuntimeException> producer, T value ) {
+        return producer != null ? producer.apply(value) : new RuntimeException("Exception producer is null");
+    }
+
 }
+
+class Response<T> {
+
+    @SerializedName("response")
+    private T content;
+
+    T getContent() {
+        return content;
+    }
+}
+
+class Result<T> {
+
+    @SerializedName("result")
+    private T result;
+
+    T getResult() {
+        return result;
+    }
+}
+
 
 class ErrorHolder {
     @SerializedName("error")
