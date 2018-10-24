@@ -5,6 +5,7 @@ import org.oxbow.tesla.domain.Vehicle;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 import java.util.List;
@@ -12,15 +13,23 @@ import java.util.List;
 interface TeslaService {
 
     String VERSION = "1";
+    String BASE_URL = "/api/" + VERSION + "/vehicles/";
+    String AUTHORIZATION_HEADER = "Authorization";
 
-    @GET("/api/" + VERSION + "/vehicles")
-    Call<ContentHolder<List<Vehicle>>> getVehicles(@Header("Authorization") String authorization);
+    @GET(BASE_URL)
+    Call<Response<List<Vehicle>>> getVehicles(@Header(AUTHORIZATION_HEADER) String authorization);
 
-    @GET("/api/" + VERSION + "/vehicles/{id}")
-    Call<ContentHolder<Vehicle>> getVehicle(@Header("Authorization") String authorization, @Path("id") long id);
+    @GET(BASE_URL + "{id}")
+    Call<Response<Vehicle>> getVehicle(@Header(AUTHORIZATION_HEADER) String authorization, @Path("id") long id);
 
-    @GET("/api/" + VERSION + "/vehicles/{id}/data_request/charge_state")
-    Call<ContentHolder<ChargeState>> getChargeState(@Header("Authorization") String authorization, @Path("id") long id);
+    @GET(BASE_URL + "{id}/data_request/charge_state")
+    Call<Response<ChargeState>> getChargeState(@Header(AUTHORIZATION_HEADER) String authorization, @Path("id") long id);
+
+
+    // Commands
+
+    @POST(BASE_URL + "{id}/command/wake")
+    Call<Result<Boolean>> wake(@Header(AUTHORIZATION_HEADER) String authorization, @Path("id") long id);
 
 
 }
