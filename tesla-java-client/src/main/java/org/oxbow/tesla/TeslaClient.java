@@ -1,5 +1,6 @@
 package org.oxbow.tesla;
 
+import com.google.gson.annotations.SerializedName;
 import org.oxbow.tesla.domain.ChargeState;
 import org.oxbow.tesla.domain.Vehicle;
 import retrofit2.Call;
@@ -27,6 +28,7 @@ public final class TeslaClient extends BaseService {
                 tokenCall.clone(),
                 AuthorizationException::new,
                 AuthorizationException::new);
+//        System.out.println(tokenResponse.getTokenType() + " " + tokenResponse.getAccessToken());
         return tokenResponse.getTokenType() + " " + tokenResponse.getAccessToken();
     }
 
@@ -36,7 +38,7 @@ public final class TeslaClient extends BaseService {
      * @throws IOException
      */
     public List<Vehicle> getVehicles() {
-        return getResponse( service.getVehicles(getTokenHeaderValue()));
+        return fromResponse( service.getVehicles(getTokenHeaderValue()));
     }
 
     /**
@@ -46,18 +48,18 @@ public final class TeslaClient extends BaseService {
      * @throws IOException
      */
     public Vehicle getVehicle( long id ) {
-        return getResponse( service.getVehicle(getTokenHeaderValue(), id));
+        return fromResponse( service.getVehicle(getTokenHeaderValue(), id));
     }
 
     public ChargeState getChargeState( long id ) {
-        return getResponse( service.getChargeState(getTokenHeaderValue(), id));
+        return fromResponse( service.getChargeState(getTokenHeaderValue(), id));
     }
 
 
     // Commands
 
     public boolean wake( long id ) {
-        return getResult( service.wake(getTokenHeaderValue(),id));
+        return fromResult( service.wake(getTokenHeaderValue(),id));
     }
 
 }

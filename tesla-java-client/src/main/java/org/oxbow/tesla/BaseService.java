@@ -13,12 +13,12 @@ class BaseService {
 
     private static Gson GSON = new Gson();
 
-    <T> T getResponse(Call<Response<T>> call ) {
+    <T> T fromResponse(Call<Response<T>> call ) {
         return getCallValue(call).getContent();
     }
 
-    <T> T getResult(Call<Result<T>> call ) {
-        return getCallValue(call).getResult();
+    <T> T fromResult(Call<Response<Result<T>>> call ) {
+        return fromResponse(call).getResult();
     }
 
     <T> T getCallValue(Call<T> call ) {
