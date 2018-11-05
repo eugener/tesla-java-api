@@ -14,11 +14,11 @@ class BaseService {
     private static final Gson GSON = new Gson();
 
     <T> T asResponse(Call<Response<T>> call ) {
-        return executeCall(call).getContent();
+        return executeCall(call).content;
     }
 
     <T> T asResult(Call<Response<Result<T>>> call ) {
-        return asResponse(call).getResult();
+        return asResponse(call).result;
     }
 
     <T> T executeCall(Call<T> call ) {
@@ -34,7 +34,7 @@ class BaseService {
             if ( response.isSuccessful() ) {
                 return response.body();
             } else {
-                String errorJson = new String( response.errorBody().bytes(), StandardCharsets.UTF_8);
+                String errorJson = new String( Objects.requireNonNull(response.errorBody()).bytes(), StandardCharsets.UTF_8);
                 ErrorHolder errorHolder = GSON.fromJson(errorJson, ErrorHolder.class );
                 throw produceException( fromText, errorHolder.error);
             }
@@ -50,27 +50,17 @@ class BaseService {
 }
 
 class Response<T> {
-
     @SerializedName("response")
-    private T content;
-
-    T getContent() {
-        return content;
-    }
+    final T content = null;
 }
 
 class Result<T> {
-
     @SerializedName("result")
-    private T result;
-
-    T getResult() {
-        return result;
-    }
+    final T result = null;
 }
 
 
 class ErrorHolder {
     @SerializedName("error")
-    String error;
+    final String error = null;
 }
