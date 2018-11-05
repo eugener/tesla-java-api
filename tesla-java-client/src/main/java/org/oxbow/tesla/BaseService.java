@@ -35,8 +35,8 @@ class BaseService {
                 return response.body();
             } else {
                 String errorJson = new String( Objects.requireNonNull(response.errorBody()).bytes(), StandardCharsets.UTF_8);
-                ErrorHolder errorHolder = GSON.fromJson(errorJson, ErrorHolder.class );
-                throw produceException( fromText, errorHolder.error);
+                Error error = GSON.fromJson(errorJson, Error.class );
+                throw produceException( fromText, error.message);
             }
         } catch (IOException e) {
             throw produceException( fromCause, e);
@@ -60,7 +60,7 @@ class Result<T> {
 }
 
 
-class ErrorHolder {
+class Error {
     @SerializedName("error")
-    final String error = null;
+    final String message = null;
 }
