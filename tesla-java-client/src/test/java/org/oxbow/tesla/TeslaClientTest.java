@@ -14,6 +14,7 @@ import static org.oxbow.tesla.TestSupport.*;
 class TeslaClientTest  {
 
     private final String user = System.getProperty("tesla.user");
+    @SuppressWarnings("SpellCheckingInspection")
     private final String pswd = System.getProperty("tesla.pswd");
 
     private final TeslaClient client = TeslaClient.Builder(user, pswd).build();
@@ -46,11 +47,11 @@ class TeslaClientTest  {
         assertNotNull(chargeState);
     }
 
-    @Test
-    @DisplayName("Honk Horn Command")
-    void testHonkHornCommand() {
-        assertTrue( client.honkHorn( vehicleId.get() ));
-    }
+//    @Test
+//    @DisplayName("Honk Horn Command")
+//    void testHonkHornCommand() {
+//        assertTrue( client.honkHorn( vehicleId.get() ));
+//    }
 
 }
 
