@@ -32,5 +32,8 @@ interface TeslaService {
     @Headers({"Accept: application/json"})
     Call<Response<Result<Boolean>>> wakeUp(@Header(AUTHORIZATION_HEADER) String authorization, @Path("id") long id);
 
+    @POST(BASE_URL + "{id}/command/honk_horn")
+    @Headers({"Accept: application/json"})
+    Call<Response<Result<Boolean>>> honkHorn(@Header(AUTHORIZATION_HEADER) String authorization, @Path("id") long id);
 
 }

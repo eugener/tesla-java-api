@@ -33,7 +33,7 @@ class TeslaClientTest  {
     void testVehicleAPI() {
         assertFalse( vehicles.get().isEmpty());
         Long id = vehicleId.get();
-        System.out.println(id);
+//        System.out.println(id);
         Vehicle vehicle = client.getVehicle(id);
         assertEquals( id, vehicle.getId());
     }
@@ -44,6 +44,12 @@ class TeslaClientTest  {
         client.wakeUp(vehicleId.get());
         ChargeState chargeState = client.getChargeState(vehicleId.get());
         assertNotNull(chargeState);
+    }
+
+    @Test
+    @DisplayName("Honk Horn Command")
+    void testHonkHornCommand() {
+        assertTrue( client.honkHorn( vehicleId.get() ));
     }
 
 }

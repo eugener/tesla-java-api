@@ -77,5 +77,9 @@ public final class TeslaClient extends BaseService {
         return asResult( service.wakeUp(getTokenHeaderValue(),id));
     }
 
+    public boolean honkHorn(long id ) {
+        return asResult( service.honkHorn(getTokenHeaderValue(),id));
+    }
+
 }
 
