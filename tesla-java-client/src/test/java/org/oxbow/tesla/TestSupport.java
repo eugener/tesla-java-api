@@ -10,7 +10,7 @@ final class TestSupport {
      * @param <T> value type
      * @return cached supplier
      */
-    public static <T> Supplier<T> chached(final Supplier<T> supplier ) {
+    public static <T> Supplier<T> cached(final Supplier<T> supplier ) {
         return new Supplier<T>() {
             private T value; // = null
             @Override public T get() {

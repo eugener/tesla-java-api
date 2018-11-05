@@ -30,7 +30,7 @@ interface TeslaService {
 
     @POST(BASE_URL + "{id}/command/wake_up")
     @Headers({"Accept: application/json"})
-    Call<Response<Result<Boolean>>> wake(@Header(AUTHORIZATION_HEADER) String authorization, @Path("id") long id);
+    Call<Response<Result<Boolean>>> wakeUp(@Header(AUTHORIZATION_HEADER) String authorization, @Path("id") long id);
 
 
 }

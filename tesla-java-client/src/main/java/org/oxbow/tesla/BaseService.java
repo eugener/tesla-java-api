@@ -13,21 +13,21 @@ class BaseService {
 
     private static Gson GSON = new Gson();
 
-    <T> T fromResponse(Call<Response<T>> call ) {
-        return getCallValue(call).getContent();
+    <T> T asResponse(Call<Response<T>> call ) {
+        return executeCall(call).getContent();
     }
 
-    <T> T fromResult(Call<Response<Result<T>>> call ) {
-        return fromResponse(call).getResult();
+    <T> T asResult(Call<Response<Result<T>>> call ) {
+        return asResponse(call).getResult();
     }
 
-    <T> T getCallValue(Call<T> call ) {
-        return getCallValue(call, RuntimeException::new, RuntimeException::new );
+    <T> T executeCall(Call<T> call ) {
+        return executeCall(call, RuntimeException::new, RuntimeException::new );
     }
 
-    <T> T getCallValue(Call<T> call,
-                       Function<Throwable,RuntimeException> fromCause,
-                       Function<String,RuntimeException> fromText) {
+    <T> T executeCall(Call<T> call,
+                      Function<Throwable,RuntimeException> fromCause,
+                      Function<String,RuntimeException> fromText) {
 
         try {
             retrofit2.Response<T> response = Objects.requireNonNull( call ).execute();

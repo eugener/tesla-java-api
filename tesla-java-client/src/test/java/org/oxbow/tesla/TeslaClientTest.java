@@ -18,14 +18,14 @@ class TeslaClientTest  {
 
     private TeslaClient client = TeslaClient.Builder(user, pswd).build();
 
-    private Supplier<List<Vehicle>> vehicles = chached(() -> client.getVehicles());
-    private Supplier<Long>         vehicleId = chached(() -> vehicles.get().get(0).getId());
+    private Supplier<List<Vehicle>> vehicles = cached( client::getVehicles);
+    private Supplier<Long>         vehicleId = cached( () -> vehicles.get().get(0).getId());
 
 
     @Test
     @DisplayName("Wake Command")
     void testWakeCommand() {
-        assertTrue( client.wake( vehicleId.get() ));
+        assertTrue( client.wakeUp( vehicleId.get() ));
     }
 
     @Test
@@ -41,7 +41,7 @@ class TeslaClientTest  {
     @Test
     @DisplayName("Charge State API")
     void testChargeStateAPI() {
-        client.wake(vehicleId.get());
+        client.wakeUp(vehicleId.get());
         ChargeState chargeState = client.getChargeState(vehicleId.get());
         assertNotNull(chargeState);
     }

@@ -1,6 +1,5 @@
 package org.oxbow.tesla;
 
-import com.google.gson.annotations.SerializedName;
 import org.oxbow.tesla.domain.ChargeState;
 import org.oxbow.tesla.domain.Vehicle;
 import retrofit2.Call;
@@ -18,13 +17,19 @@ public final class TeslaClient extends BaseService {
         this.tokenCall = tokenCall;
     }
 
+    /**
+     * Creates a builder, which is used to configure the client
+     * @param email Tesla account email
+     * @param password Tesla account password
+     * @return TeslaClientBuilder
+     */
     public static TeslaClientBuilder Builder( String email, String password ) {
         return new TeslaClientBuilder(email,password);
     }
 
     // TODO refresh token when expired
     private String getTokenHeaderValue() {
-        TokenResponse tokenResponse = getCallValue(
+        TokenResponse tokenResponse = executeCall(
                 tokenCall.clone(),
                 AuthorizationException::new,
                 AuthorizationException::new);
@@ -38,28 +43,38 @@ public final class TeslaClient extends BaseService {
      * @throws IOException
      */
     public List<Vehicle> getVehicles() {
-        return fromResponse( service.getVehicles(getTokenHeaderValue()));
+        return asResponse( service.getVehicles(getTokenHeaderValue()));
     }
 
     /**
      * Returns the state of the vehicle's various sub-systems.
-     * @param id vehicle `id`
+     * @param id vehicle id
      * @return vehicle information
      * @throws IOException
      */
     public Vehicle getVehicle( long id ) {
-        return fromResponse( service.getVehicle(getTokenHeaderValue(), id));
+        return asResponse( service.getVehicle(getTokenHeaderValue(), id));
     }
 
+    /**
+     * Information on the battery state of charge and its various settings.
+     * @param id vehicle id
+     * @return
+     */
     public ChargeState getChargeState( long id ) {
-        return fromResponse( service.getChargeState(getTokenHeaderValue(), id));
+        return asResponse( service.getChargeState(getTokenHeaderValue(), id));
     }
 
 
     // Commands
 
-    public boolean wake( long id ) {
-        return fromResult( service.wake(getTokenHeaderValue(),id));
+    /**
+     * Wakes up the vehicle with given id
+     * @param id vehicle id
+     * @return true on success
+     */
+    public boolean wakeUp(long id ) {
+        return asResult( service.wakeUp(getTokenHeaderValue(),id));
     }
 
 }
