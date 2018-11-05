@@ -19,7 +19,6 @@ public final class TeslaClientBuilder {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-    private Call<TokenResponse> tokenCall;
     private String clientId = null;
     private String clientSecret = null;
 
@@ -53,14 +52,14 @@ public final class TeslaClientBuilder {
      */
     public final TeslaClient build() {
 
-        tokenCall = retrofit.create(TeslaAuthService.class).getToken(
+        Call<TokenResponse> tokenCall = retrofit.create(TeslaAuthService.class).getToken(
                 "password",
                 Optional.ofNullable(clientId).orElse(CLIENT_ID),
                 Optional.ofNullable(clientSecret).orElse(CLIENT_SECRET),
                 email,
                 password);
 
-        return new TeslaClient( retrofit.create(TeslaService.class), tokenCall );
+        return new TeslaClient( retrofit.create(TeslaService.class), tokenCall);
     }
 
 }
