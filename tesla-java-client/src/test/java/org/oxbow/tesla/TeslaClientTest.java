@@ -13,13 +13,13 @@ import static org.oxbow.tesla.TestSupport.*;
 
 class TeslaClientTest  {
 
-    private String user = System.getProperty("tesla.user");
-    private String pswd = System.getProperty("tesla.pswd");
+    private final String user = System.getProperty("tesla.user");
+    private final String pswd = System.getProperty("tesla.pswd");
 
-    private TeslaClient client = TeslaClient.Builder(user, pswd).build();
+    private final TeslaClient client = TeslaClient.Builder(user, pswd).build();
 
-    private Supplier<List<Vehicle>> vehicles = cached( client::getVehicles);
-    private Supplier<Long>         vehicleId = cached( () -> vehicles.get().get(0).getId());
+    private final Supplier<List<Vehicle>> vehicles = cached( client::getVehicles);
+    private final Supplier<Long>         vehicleId = cached( () -> vehicles.get().get(0).getId());
 
 
     @Test

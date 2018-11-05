@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 class BaseService {
 
-    private static Gson GSON = new Gson();
+    private static final Gson GSON = new Gson();
 
     <T> T asResponse(Call<Response<T>> call ) {
         return executeCall(call).getContent();

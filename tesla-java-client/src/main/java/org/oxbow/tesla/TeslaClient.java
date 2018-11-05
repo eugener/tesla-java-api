@@ -4,7 +4,6 @@ import org.oxbow.tesla.domain.ChargeState;
 import org.oxbow.tesla.domain.Vehicle;
 import retrofit2.Call;
 
-import java.io.IOException;
 import java.util.List;
 
 public final class TeslaClient extends BaseService {
@@ -40,7 +39,6 @@ public final class TeslaClient extends BaseService {
     /**
      * Retrieve a list of your owned vehicles (includes vehicles not yet shipped!)
      * @return list of vehicles
-     * @throws IOException
      */
     public List<Vehicle> getVehicles() {
         return asResponse( service.getVehicles(getTokenHeaderValue()));
@@ -50,7 +48,6 @@ public final class TeslaClient extends BaseService {
      * Returns the state of the vehicle's various sub-systems.
      * @param id vehicle id
      * @return vehicle information
-     * @throws IOException
      */
     public Vehicle getVehicle( long id ) {
         return asResponse( service.getVehicle(getTokenHeaderValue(), id));
@@ -59,7 +56,7 @@ public final class TeslaClient extends BaseService {
     /**
      * Information on the battery state of charge and its various settings.
      * @param id vehicle id
-     * @return
+     * @return charge state
      */
     public ChargeState getChargeState( long id ) {
         return asResponse( service.getChargeState(getTokenHeaderValue(), id));
@@ -69,7 +66,7 @@ public final class TeslaClient extends BaseService {
     // Commands
 
     /**
-     * Wakes up the vehicle with given id
+     * Attempts to wake the vehicle with given id up
      * @param id vehicle id
      * @return true on success
      */
@@ -77,6 +74,11 @@ public final class TeslaClient extends BaseService {
         return asResult( service.wakeUp(getTokenHeaderValue(),id));
     }
 
+    /**
+     * Attempts to hunk the horn for give vehicle
+     * @param id vehicle id
+     * @return true on success
+     */
     public boolean honkHorn(long id ) {
         return asResult( service.honkHorn(getTokenHeaderValue(),id));
     }
