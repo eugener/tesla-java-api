@@ -61,8 +61,18 @@ public final class TeslaClient extends BaseService {
     public ChargeState getChargeState( long id ) {
         return asResponse( service.getChargeState(getTokenHeaderValue(), id));
     }
-
-
+    public boolean setChargeState( long id, int percent ) {
+       return asResult(service.setChargeLimit(getTokenHeaderValue(), id, percent));
+    }
+    public boolean setTemps( long id, double driverTempCelcius, double passengerTempCelcius) {
+       return asResult(service.setTemps(getTokenHeaderValue(), id, driverTempCelcius, passengerTempCelcius));
+    }
+    public boolean startHvac( long id ) {
+       return asResult(service.startHvac(getTokenHeaderValue(), id));
+    }
+    public boolean stopHvac( long id ) {
+       return asResult(service.stopHvac(getTokenHeaderValue(), id));
+    }
     // Commands
 
     /**

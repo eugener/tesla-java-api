@@ -36,4 +36,25 @@ interface TeslaService {
     @Headers({"Accept: application/json"})
     Call<Response<Result<Boolean>>> honkHorn(@Header(AUTHORIZATION_HEADER) String authorization, @Path("id") long id);
 
+    @FormUrlEncoded
+    @POST(BASE_URL + "{id}/command/set_charge_limit")
+    @Headers({"Accept: application/json"})
+    Call<Response<Result<Boolean>>> setChargeLimit(@Header(AUTHORIZATION_HEADER) String authorization, 
+   		 @Path("id") long id, @Field("percent") int percent);
+
+    @FormUrlEncoded
+    @POST(BASE_URL + "{id}/command/set_temps")
+    @Headers({"Accept: application/json"})
+    Call<Response<Result<Boolean>>> setTemps(@Header(AUTHORIZATION_HEADER) String authorization, 
+   		 @Path("id") long id, @Field("driver_temp") double driverTemp,
+   		 @Field("passenger_temp") double passengerTemp);
+
+    @POST(BASE_URL + "{id}/command/auto_conditioning_start")
+    @Headers({"Accept: application/json"})
+    Call<Response<Result<Boolean>>> startHvac(@Header(AUTHORIZATION_HEADER) String authorization, @Path("id") long id);
+
+    @POST(BASE_URL + "{id}/command/auto_conditioning_stop")
+    @Headers({"Accept: application/json"})
+    Call<Response<Result<Boolean>>> stopHvac(@Header(AUTHORIZATION_HEADER) String authorization, @Path("id") long id);
+
 }
